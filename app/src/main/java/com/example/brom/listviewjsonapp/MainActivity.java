@@ -143,13 +143,12 @@ public class MainActivity extends AppCompatActivity {
             try {
                 JSONArray veronicaarray = new JSONArray(o);
 
-                for(int i=0; i <veronicaarray.length(); i++){
+                for(int i=0; i < veronicaarray.length(); i++){
                     Log.d("veronica", "element 0"+veronicaarray.get(i).toString());
                 }
             } catch (JSONException e) {
                 Log.e("veronica","E:"+e.getMessage());
             }
-
         }
     }
 }
