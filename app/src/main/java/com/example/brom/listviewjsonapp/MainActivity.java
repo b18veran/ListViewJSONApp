@@ -11,6 +11,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,11 +47,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            setContentView(R.layout.activity_main);
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-            
-
+            new FetchData().execute();
 
             setContentView(R.layout.activity_main);
             listData=new ArrayList<>(Arrays.asList(mountainNames));
@@ -133,12 +133,23 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String o) {
             super.onPostExecute(o);
-            Log.d("brom", "DataFetched:"+o);
+            Log.d("veronica", "DataFetched:"+o);
+
             // This code executes after we have received our data. The String object o holds
             // the un-parsed JSON string or is null if we had an IOException during the fetch.
 
             // Implement a parsing code that loops through the entire JSON and creates objects
             // of our newly created Mountain class.
+            try {
+                JSONArray veronicaarray = new JSONArray(o);
+
+                for(int i=0; i <9; i++){
+                    Log.d("veronica", "element 0"+veronicaarray.get(i).toString());
+                }
+            } catch (JSONException e) {
+                Log.e("veronica","E:"+e.getMessage());
+            }
+
         }
     }
 }
