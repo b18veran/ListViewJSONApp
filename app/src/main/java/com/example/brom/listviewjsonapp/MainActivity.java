@@ -4,6 +4,11 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,6 +16,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 // Create a new class, Mountain, that can hold your JSON data
@@ -25,12 +32,34 @@ import java.net.URL;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    private String[] mountainNames = {"Matterhorn","Mont Blanc","Denali"};
+    private String[] mountainLocations = {"Alps","Alps","Alaska"};
+    private int[] mountainHeights ={4478,4808,6190};
+    // Create ArrayLists from the raw data above and use these lists when populating your ListView.
+    private ArrayList<String> listData;
+    private ArrayAdapter<String> adapter;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+            listData=new ArrayList<>(Arrays.asList(mountainNames));
+            adapter= new ArrayAdapter<String>(this, R.layout. list_item_textview, R.id.list_item_textview, listData);
+
+            ListView my_listview=(ListView) findViewById(R.id.my_listview);
+            my_listview.setAdapter(adapter);
+
+            my_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+                    //Skapar en variabel som hämtar datan som ska fram i toasten.
+                    String test = " "       + mountainNames[i] + " "
+                            + mountainLocations [i] +" "
+                            + mountainHeights [i] + " ";
+                    Toast.makeText(MainActivity.this, test, Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }
 
     private class FetchData extends AsyncTask<Void,Void,String>{
         @Override
