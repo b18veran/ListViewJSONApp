@@ -145,6 +145,11 @@ public class MainActivity extends AppCompatActivity {
 
                 for(int i=0; i < veronicaarray.length(); i++){
                     Log.d("veronica", "element 0"+veronicaarray.get(i).toString());
+                    JSONObject veronicaobject = veronicaarray.getJSONObject(i);
+                    Log.d("veronica", veronicaobject.getString("name"));
+                    Log.d("veronica", veronicaobject.getString("location"));
+                    Log.d("veronica", veronicaobject.getString("size"));
+                    //Mountain m = new Mountain();
                 }
             } catch (JSONException e) {
                 Log.e("veronica","E:"+e.getMessage());
