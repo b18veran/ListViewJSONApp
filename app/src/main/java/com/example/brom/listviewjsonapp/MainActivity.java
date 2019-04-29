@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private int[] mountainHeights ={4478,4808,6190};
     // Create ArrayLists from the raw data above and use these lists when populating your ListView.
     private ArrayList<String> listData;
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<Mountain> adapter;
     @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
             setContentView(R.layout.activity_main);
             listData=new ArrayList<>(Arrays.asList(mountainNames));
-            adapter= new ArrayAdapter<String>(this, R.layout. list_item_textview, R.id.list_item_textview, listData);
+            adapter= new ArrayAdapter<Mountain>(this, R.layout. list_item_textview, R.id.list_item_textview);
 
             ListView my_listview=(ListView) findViewById(R.id.my_listview);
             my_listview.setAdapter(adapter);
@@ -60,9 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                     //Skapar en variabel som hämtar datan som ska fram i toasten.
-                    String test = " "       + mountainNames[i] + " "
-                            + mountainLocations [i] +" "
-                            + mountainHeights [i] + " ";
+                    String test = adapter.getItem(i).info();
                     Toast.makeText(MainActivity.this, test, Toast.LENGTH_SHORT).show();
                 }
             });
@@ -148,8 +146,14 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject veronicaobject = veronicaarray.getJSONObject(i);
                     Log.d("veronica", veronicaobject.getString("name"));
                     Log.d("veronica", veronicaobject.getString("location"));
-                    Log.d("veronica", veronicaobject.getString("size"));
-                    //Mountain m = new Mountain();
+                    Log.d("veronica", ""+ veronicaobject.getInt("size"));
+                    String n = veronicaobject.getString("name");
+                    String l = veronicaobject.getString("location");
+                    int h = 1;
+
+                    Mountain m = new Mountain(veronicaobject.getString("name"),veronicaobject.getString("location"), veronicaobject.getInt("size"));
+                    Log.d("veronica", m.toString());
+                    adapter.add(m);
                 }
             } catch (JSONException e) {
                 Log.e("veronica","E:"+e.getMessage());

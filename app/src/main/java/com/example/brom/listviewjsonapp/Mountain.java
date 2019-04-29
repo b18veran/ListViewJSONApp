@@ -21,7 +21,7 @@ public class Mountain {
     public String info()
     {
         String tmp=new String();
-        tmp+=name+" is located in mountain range " + location +" and reaches" + height +" m above sea level.";
+        tmp+="Name " + name+"\n"+"Location "+ location+"\n"+ "Height "+ height;
         return tmp;
     }
     public void setName(String n)
