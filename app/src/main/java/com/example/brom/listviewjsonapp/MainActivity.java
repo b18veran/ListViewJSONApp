@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 // Construct the URL for the Internet service
-                URL url = new URL("http://wwwlab.iit.his.se/brom/kurser/mobilprog/dbservice/admin/getdataasjson.php?type=brom");
+                URL url = new URL("http://wwwlab.iit.his.se/b18veran/Mobilapplikations-programmering/Gymnast_Data.php");
 
                 // Create the request to the PHP-service, and open the connection
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -168,11 +168,15 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("veronica", veronicaobject.getString("name"));
                     Log.d("veronica", veronicaobject.getString("location"));
                     Log.d("veronica", ""+ veronicaobject.getInt("size"));
+                    Log.d("veronica", veronicaobject.getString("company"));
+                    Log.d("veronica", veronicaobject.getString("auxdata"));
                     String n = veronicaobject.getString("name");
                     String l = veronicaobject.getString("location");
+                    String s = veronicaobject.getString("company");
+                    String a = veronicaobject.getString("auxdata");
                     int h = 1;
 
-                    Mountain m = new Mountain(veronicaobject.getString("name"),veronicaobject.getString("location"), veronicaobject.getInt("size"));
+                    Mountain m = new Mountain(veronicaobject.getString("name"),veronicaobject.getString("location"), veronicaobject.getInt("size"), veronicaobject.getString("company"), veronicaobject.getString("auxdata"));
                     Log.d("veronica", m.toString());
                     adapter.add(m);
                 }
